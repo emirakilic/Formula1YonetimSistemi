@@ -1,1 +1,6 @@
-<Solution />
+<Solution>
+  <Project Path="Formula1YonetimSistemi.Common/Formula1YonetimSistemi.Common.csproj" />
+  <Project Path="Formula1YonetimSistemi.Entity/Formula1YonetimSistemi.Entity.csproj" />
+  <Project Path="Formula1YonetimSistemi.Service/Formula1YonetimSistemi.Service.csproj" />
+  <Project Path="Formula1YonetimSistemi.UI/Formula1YonetimSistemi.UI.csproj" />
+</Solution>
