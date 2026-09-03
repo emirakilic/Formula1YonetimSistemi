@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Formula1YonetimSistemi.Common/Helpers/README.md
+/Formula1YonetimSistemi.Console/ExceptionHandler_Rehberi.md
