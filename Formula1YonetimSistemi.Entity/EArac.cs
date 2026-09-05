@@ -1,23 +1,14 @@
-﻿using Formula1YonetimSistemi.Common.DTO;
+using Formula1YonetimSistemi.Common.DTO;
 using Formula1YonetimSistemi.Common.Helpers;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Formula1YonetimSistemi.Entity
 {
     public class EArac
     {
-        public EArac()
-        {
-
-        }
-
-        /// <summary>
-        /// Yeni bir araç ekler
-        /// </summary>
-        public bool AracEkle(string aracSasiKodu, string aracMotorTedarikcisi, int takimId)
+        public bool AracEkle(Arac arac)
         {
             try
             {
@@ -27,9 +18,9 @@ namespace Formula1YonetimSistemi.Entity
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@AracSasiKodu", aracSasiKodu);
-                        command.Parameters.AddWithValue("@AracMotorTedarikcisi", aracMotorTedarikcisi);
-                        command.Parameters.AddWithValue("@TakimId", takimId);
+                        command.Parameters.AddWithValue("@AracSasiKodu", arac.AracSasiKodu);
+                        command.Parameters.AddWithValue("@AracMotorTedarikcisi", arac.AracMotorTedarikcisi);
+                        command.Parameters.AddWithValue("@TakimId", arac.TakimId);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();
@@ -39,19 +30,10 @@ namespace Formula1YonetimSistemi.Entity
             }
             catch (Exception ex)
             {
-                string hataDetayi = $"Araç ekleme işleminde hata oluştu!\n" +
-                    $"Stored Procedure: sp_AracEkle\n" +
-                    $"Parametreler - Şasi Kodu: {aracSasiKodu}, Motor Tedarikçisi: {aracMotorTedarikcisi}, Takım ID: {takimId}\n" +
-                    $"Orijinal Hata: {ex.Message}";
-
-                throw new Exception(hataDetayi, ex);
+                throw new Exception($"Araç ekleme işleminde hata oluştu! Şasi: {arac.AracSasiKodu}, Motor: {arac.AracMotorTedarikcisi}", ex);
             }
         }
-
-        /// <summary>
-        /// ID'ye göre araç getirir
-        /// </summary>
-        public Arac GetirAracById(int sorgulanacakAracId)
+        public Arac GetirAracById(Arac arac)
         {
             try
             {
@@ -60,7 +42,7 @@ namespace Formula1YonetimSistemi.Entity
                     using (SqlCommand command = new SqlCommand("sp_AracGetirById", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@AracId", sorgulanacakAracId);
+                        command.Parameters.AddWithValue("@AracId", arac.AracId);
 
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -82,20 +64,10 @@ namespace Formula1YonetimSistemi.Entity
             }
             catch (Exception ex)
             {
-                // SQL Exception bilgilerini detaylı olarak gönder
-                string hataDetayi = $"Araç getirme işleminde hata oluştu!\n" +
-                    $"Stored Procedure: sp_AracGetirById\n" +
-                    $"Parametre - AracId: {sorgulanacakAracId}\n" +
-                    $"Orijinal Hata: {ex.Message}";
-
-                throw new Exception(hataDetayi, ex);
+                throw new Exception($"Araç getirme işleminde hata oluştu! AracId: {arac.AracId}", ex);
             }
         }
-
-        /// <summary>
-        /// Araç bilgilerini günceller
-        /// </summary>
-        public bool AracGuncelle(int aracId, string aracSasiKodu, string aracMotorTedarikcisi, int takimId)
+        public bool AracGuncelle(Arac arac)
         {
             try
             {
@@ -105,10 +77,10 @@ namespace Formula1YonetimSistemi.Entity
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@AracId", aracId);
-                        command.Parameters.AddWithValue("@AracSasiKodu", aracSasiKodu);
-                        command.Parameters.AddWithValue("@AracMotorTedarikcisi", aracMotorTedarikcisi);
-                        command.Parameters.AddWithValue("@TakimId", takimId);
+                        command.Parameters.AddWithValue("@AracId", arac.AracId);
+                        command.Parameters.AddWithValue("@AracSasiKodu", arac.AracSasiKodu);
+                        command.Parameters.AddWithValue("@AracMotorTedarikcisi", arac.AracMotorTedarikcisi);
+                        command.Parameters.AddWithValue("@TakimId", arac.TakimId);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();
@@ -118,18 +90,9 @@ namespace Formula1YonetimSistemi.Entity
             }
             catch (Exception ex)
             {
-                string hataDetayi = $"Araç güncelleme işleminde hata oluştu!\n" +
-                    $"Stored Procedure: sp_AracGuncelle\n" +
-                    $"Parametreler - Araç ID: {aracId}, Şasi Kodu: {aracSasiKodu}, Motor Tedarikçisi: {aracMotorTedarikcisi}, Takım ID: {takimId}\n" +
-                    $"Orijinal Hata: {ex.Message}";
-
-                throw new Exception(hataDetayi, ex);
+                throw new Exception($"Araç güncelleme işleminde hata oluştu! AracId: {arac.AracId}", ex);
             }
         }
-
-        /// <summary>
-        /// Araç silir
-        /// </summary>
         public bool AracSil(int aracId)
         {
             try
@@ -149,18 +112,9 @@ namespace Formula1YonetimSistemi.Entity
             }
             catch (Exception ex)
             {
-                string hataDetayi = $"Araç silme işleminde hata oluştu!\n" +
-                    $"Stored Procedure: sp_AracSil\n" +
-                    $"Parametre - Araç ID: {aracId}\n" +
-                    $"Orijinal Hata: {ex.Message}";
-
-                throw new Exception(hataDetayi, ex);
+                throw new Exception($"Araç silme işleminde hata oluştu! AracId: {aracId}", ex);
             }
         }
-
-        /// <summary>
-        /// Araçları listeler (TakımId ve Motor Tedarikçisine göre filtrleme yapılabilir)
-        /// </summary>
         public List<Arac> AraclariGetir(int? takimId = null, string aracMotorTedarikcisi = null)
         {
             List<Arac> araclar = new List<Arac>();
@@ -195,12 +149,7 @@ namespace Formula1YonetimSistemi.Entity
             }
             catch (Exception ex)
             {
-                string hataDetayi = $"Araçları listeleme işleminde hata oluştu!\n" +
-                    $"Stored Procedure: sp_AraclariGetir\n" +
-                    $"Parametreler - Takım ID: {(takimId != null ? takimId.ToString() : "NULL")}, Motor Tedarikçisi: {(aracMotorTedarikcisi ?? "NULL")}\n" +
-                    $"Orijinal Hata: {ex.Message}";
-
-                throw new Exception(hataDetayi, ex);
+                throw new Exception($"Araçları listeleme işleminde hata oluştu!", ex);
             }
 
             return araclar;
