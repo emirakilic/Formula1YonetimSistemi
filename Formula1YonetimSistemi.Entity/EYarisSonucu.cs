@@ -134,10 +134,11 @@ namespace Formula1YonetimSistemi.Entity
             {
                 using (SqlConnection connection = SqlHelper.GetConnection())
                 {
-                    using (SqlCommand command = new SqlCommand("sp_YarisSonuclariGetir", connection))
+                    using (SqlCommand command = new SqlCommand("sp_YarisSonuclariniGetir", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@YarisId", yarisId != null ? (object)yarisId : DBNull.Value);
+                        command.Parameters.AddWithValue("@YarisId", yarisId.HasValue ? (object)yarisId.Value : DBNull.Value);
+                        command.Parameters.AddWithValue("@PilotId", DBNull.Value); // Pilot filtresi şimdilik boş geçilebilir
 
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -146,10 +147,10 @@ namespace Formula1YonetimSistemi.Entity
                             {
                                 sonuclar.Add(new YarisSonucu
                                 {
-                                    YarisSonucId = (int)reader["YarisSonucuId"],
+                                    YarisSonucId = (int)reader["YarisSonucId"],
                                     YarisPozisyon = (int)reader["YarisPozisyon"],
                                     YarisPuani = (decimal)reader["YarisPuani"],
-                                    YarisEnHizliTurZamani = (string)reader["YarisEnHizliTurZamani"],
+                                    YarisEnHizliTurZamani = reader["YarisEnHizliTurZamani"] != DBNull.Value ? reader["YarisEnHizliTurZamani"].ToString() : "",
                                     YarisId = (int)reader["YarisId"],
                                     PilotId = (int)reader["PilotId"]
                                 });
@@ -160,7 +161,7 @@ namespace Formula1YonetimSistemi.Entity
             }
             catch (Exception ex)
             {
-                throw new Exception("Yarış sonuçlarını listeleme işleminde hata oluştu!", ex);
+                throw new Exception("Yarış sonuçlarını listeleme işleminde hata oluştu: " + ex.Message, ex);
             }
 
             return sonuclar;

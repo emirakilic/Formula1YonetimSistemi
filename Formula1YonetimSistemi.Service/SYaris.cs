@@ -26,7 +26,7 @@ namespace Formula1YonetimSistemi.Service
             return new EYaris().YarisSil(yarisId);
         }
 
-        public List<Yaris> SYarislariGetir(string? sezon = null)
+        public List<Yaris> SYarislariGetir(int? sezon = null)
         {
             return new EYaris().YarislariGetir(sezon);
         }

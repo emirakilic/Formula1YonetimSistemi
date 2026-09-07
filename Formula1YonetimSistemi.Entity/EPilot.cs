@@ -33,7 +33,7 @@ namespace Formula1YonetimSistemi.Entity
             }
             catch (Exception ex)
             {
-                throw new Exception($"Pilot ekleme işleminde hata oluştu! Pilot: {pilot.PilotAdSoyad}, Pilot No: {pilot.PilotNo}");
+                throw new Exception(message: $"Pilot ekleme işleminde hata oluştu! Pilot: {pilot.PilotAdSoyad}, Pilot No: {pilot.PilotNo}");
             }
         }
 
@@ -121,7 +121,7 @@ namespace Formula1YonetimSistemi.Entity
             }
             catch (Exception ex)
             {
-                throw new Exception($"Pilot silme işleminde hata oluştu! PilotId: {pilotId}", ex);
+                throw new Exception("SQL HATA DETAYI: " + ex.Message);
             }
         }
         public List<Pilot> PilotlariGetir(int? takimId = null, string pilotAdSoyad = null)

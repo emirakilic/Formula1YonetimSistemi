@@ -18,8 +18,6 @@ namespace Formula1YonetimSistemi.Entity
                     using (SqlCommand command = new SqlCommand("sp_TakimEkle", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("@TakimId", takim.TakimId);
                         command.Parameters.AddWithValue("@TakimAdi", takim.TakimAdi);
                         command.Parameters.AddWithValue("@MerkezUlke", takim.MerkezUlke);
                         command.Parameters.AddWithValue("@KurulusYili", takim.KurulusYili);
@@ -34,7 +32,7 @@ namespace Formula1YonetimSistemi.Entity
             }
             catch (Exception ex)
             {
-                throw new Exception($"Takım ekleme işleminde hata oluştu! Takım: {takim.TakimAdi}", ex);
+                throw new Exception("SQL HATA DETAYI: " + ex.Message);
             }
         }
 

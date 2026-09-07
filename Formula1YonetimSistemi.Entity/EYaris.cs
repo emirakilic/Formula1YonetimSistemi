@@ -32,7 +32,7 @@ namespace Formula1YonetimSistemi.Entity
             }
             catch (Exception ex)
             {
-                throw new Exception($"Yarış ekleme işleminde hata oluştu! Sezon: {yaris.Sezon}, Pist: {yaris.PistAdi}", ex);
+                throw new Exception("SQL HATA DETAYI: " + ex.Message);
             }
         }
 
@@ -136,8 +136,6 @@ namespace Formula1YonetimSistemi.Entity
                     using (SqlCommand command = new SqlCommand("sp_YarislariGetir", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@Sezon", sezon != null ? (object)sezon : DBNull.Value);
-
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -159,7 +157,7 @@ namespace Formula1YonetimSistemi.Entity
             }
             catch (Exception ex)
             {
-                throw new Exception("Yarışları listeleme işleminde hata oluştu!", ex);
+                throw new Exception("SQL HATA DETAYI: " + ex.Message);
             }
 
             return yarislar;
