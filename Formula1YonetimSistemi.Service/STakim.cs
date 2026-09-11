@@ -8,6 +8,10 @@ namespace Formula1YonetimSistemi.Service
 {
     public class STakim
     {
+        public STakim()
+        {
+
+        }
         public Takim SGetirTakimById(Takim sorgulanacakTakim)
         {
             return new ETakim().GetirTakimById(sorgulanacakTakim);

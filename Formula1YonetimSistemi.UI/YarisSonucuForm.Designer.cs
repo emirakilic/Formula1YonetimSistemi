@@ -1,6 +1,6 @@
 ﻿namespace Formula1YonetimSistemi.UI
 {
-    partial class YarisSonucuForm
+    partial class FrmYarisSonucu
     {
         /// <summary>
         /// Required designer variable.
@@ -28,114 +28,118 @@
         /// </summary>
         private void InitializeComponent()
         {
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            dataGridView1 = new DataGridView();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            cmbPilot = new ComboBox();
+            cmbPist = new ComboBox();
+            txtEnHizliTur = new TextBox();
+            txtYarisPuani = new TextBox();
+            txtYarisPozisyonu = new TextBox();
+            dgvYarisSonucu = new DataGridView();
+            btnEkle = new Button();
+            btnSil = new Button();
+            btnGuncelle = new Button();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            btnAra = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvYarisSonucu).BeginInit();
             SuspendLayout();
             // 
-            // comboBox1
+            // cmbPilot
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(29, 54);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 0;
+            cmbPilot.FormattingEnabled = true;
+            cmbPilot.Location = new Point(29, 54);
+            cmbPilot.Name = "cmbPilot";
+            cmbPilot.Size = new Size(151, 28);
+            cmbPilot.TabIndex = 0;
             // 
-            // comboBox2
+            // cmbPist
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(241, 54);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(151, 28);
-            comboBox2.TabIndex = 1;
+            cmbPist.FormattingEnabled = true;
+            cmbPist.Location = new Point(241, 54);
+            cmbPist.Name = "cmbPist";
+            cmbPist.Size = new Size(151, 28);
+            cmbPist.TabIndex = 1;
             // 
-            // textBox1
+            // txtEnHizliTur
             // 
-            textBox1.Location = new Point(820, 55);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 2;
+            txtEnHizliTur.Location = new Point(820, 55);
+            txtEnHizliTur.Name = "txtEnHizliTur";
+            txtEnHizliTur.Size = new Size(125, 27);
+            txtEnHizliTur.TabIndex = 2;
             // 
-            // textBox2
+            // txtYarisPuani
             // 
-            textBox2.Location = new Point(641, 55);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(125, 27);
-            textBox2.TabIndex = 3;
+            txtYarisPuani.Location = new Point(641, 55);
+            txtYarisPuani.Name = "txtYarisPuani";
+            txtYarisPuani.Size = new Size(125, 27);
+            txtYarisPuani.TabIndex = 3;
             // 
-            // textBox3
+            // txtYarisPozisyonu
             // 
-            textBox3.Location = new Point(442, 55);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(125, 27);
-            textBox3.TabIndex = 4;
+            txtYarisPozisyonu.Location = new Point(442, 55);
+            txtYarisPozisyonu.Name = "txtYarisPozisyonu";
+            txtYarisPozisyonu.Size = new Size(125, 27);
+            txtYarisPozisyonu.TabIndex = 4;
             // 
-            // dataGridView1
+            // dgvYarisSonucu
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(38, 136);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(894, 324);
-            dataGridView1.TabIndex = 5;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dgvYarisSonucu.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvYarisSonucu.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvYarisSonucu.Location = new Point(38, 136);
+            dgvYarisSonucu.Name = "dgvYarisSonucu";
+            dgvYarisSonucu.RowHeadersWidth = 51;
+            dgvYarisSonucu.Size = new Size(894, 324);
+            dgvYarisSonucu.TabIndex = 5;
             // 
-            // button1
+            // btnEkle
             // 
-            button1.Location = new Point(127, 522);
-            button1.Name = "button1";
-            button1.Size = new Size(125, 65);
-            button1.TabIndex = 6;
-            button1.Text = "Ekle";
-            button1.UseVisualStyleBackColor = true;
+            btnEkle.Location = new Point(313, 522);
+            btnEkle.Name = "btnEkle";
+            btnEkle.Size = new Size(125, 65);
+            btnEkle.TabIndex = 6;
+            btnEkle.Text = "Ekle";
+            btnEkle.UseVisualStyleBackColor = true;
+            btnEkle.Click += btnEkle_Click;
             // 
-            // button2
+            // btnSil
             // 
-            button2.Location = new Point(422, 522);
-            button2.Name = "button2";
-            button2.Size = new Size(125, 65);
-            button2.TabIndex = 7;
-            button2.Text = "Sil";
-            button2.UseVisualStyleBackColor = true;
+            btnSil.Location = new Point(745, 522);
+            btnSil.Name = "btnSil";
+            btnSil.Size = new Size(125, 65);
+            btnSil.TabIndex = 7;
+            btnSil.Text = "Sil";
+            btnSil.UseVisualStyleBackColor = true;
+            btnSil.Click += btnSil_Click;
             // 
-            // button3
+            // btnGuncelle
             // 
-            button3.Location = new Point(695, 522);
-            button3.Name = "button3";
-            button3.Size = new Size(125, 65);
-            button3.TabIndex = 8;
-            button3.Text = "Güncelle";
-            button3.UseVisualStyleBackColor = true;
+            btnGuncelle.Location = new Point(529, 522);
+            btnGuncelle.Name = "btnGuncelle";
+            btnGuncelle.Size = new Size(125, 65);
+            btnGuncelle.TabIndex = 8;
+            btnGuncelle.Text = "Güncelle";
+            btnGuncelle.UseVisualStyleBackColor = true;
+            btnGuncelle.Click += btnGuncelle_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(29, 31);
             label1.Name = "label1";
-            label1.Size = new Size(58, 20);
+            label1.Size = new Size(39, 20);
             label1.TabIndex = 9;
-            label1.Text = "Pilot ID";
+            label1.Text = "Pilot";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new Point(241, 31);
             label2.Name = "label2";
-            label2.Size = new Size(58, 20);
+            label2.Size = new Size(32, 20);
             label2.TabIndex = 10;
-            label2.Text = "Yarış ID";
+            label2.Text = "Pist";
             // 
             // label3
             // 
@@ -164,49 +168,61 @@
             label5.TabIndex = 13;
             label5.Text = "En Hızlı Tur Zamanı";
             // 
-            // YarisSonucuForm
+            // btnAra
+            // 
+            btnAra.Location = new Point(97, 522);
+            btnAra.Name = "btnAra";
+            btnAra.Size = new Size(125, 65);
+            btnAra.TabIndex = 15;
+            btnAra.Text = "Ara";
+            btnAra.UseVisualStyleBackColor = true;
+            btnAra.Click += btnAra_Click;
+            // 
+            // FrmYarisSonucu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(982, 653);
+            Controls.Add(btnAra);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(dataGridView1);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
-            Name = "YarisSonucuForm";
+            Controls.Add(btnGuncelle);
+            Controls.Add(btnSil);
+            Controls.Add(btnEkle);
+            Controls.Add(dgvYarisSonucu);
+            Controls.Add(txtYarisPozisyonu);
+            Controls.Add(txtYarisPuani);
+            Controls.Add(txtEnHizliTur);
+            Controls.Add(cmbPist);
+            Controls.Add(cmbPilot);
+            Name = "FrmYarisSonucu";
             Text = "YarisSonucuForm";
             Load += YarisSonucuForm_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvYarisSonucu).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private DataGridView dataGridView1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
+        private ComboBox cmbPilot;
+        private ComboBox cmbPist;
+        private TextBox txtEnHizliTur;
+        private TextBox txtYarisPuani;
+        private TextBox txtYarisPozisyonu;
+        private DataGridView dgvYarisSonucu;
+        private Button btnEkle;
+        private Button btnSil;
+        private Button btnGuncelle;
         private Label label1;
         private Label label2;
         private Label label3;
         private Label label4;
         private Label label5;
+        private Button btnAra;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Formula1YonetimSistemi.UI
 {
-    partial class YarisForm
+    partial class FrmYaris
     {
         /// <summary>
         /// Required designer variable.
@@ -28,82 +28,88 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            dateTimePicker1 = new DateTimePicker();
-            textBox5 = new TextBox();
+            txtYarisId = new TextBox();
+            txtPistAdi = new TextBox();
+            txtTurSayisi = new TextBox();
+            txtSezonAyagi = new TextBox();
+            dtpYarisTarihi = new DateTimePicker();
+            txtSezon = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
-            dataGridView1 = new DataGridView();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            dgvYaris = new DataGridView();
+            btnEkle = new Button();
+            btnSil = new Button();
+            btnGuncelle = new Button();
+            btnAra = new Button();
+            txtGrandPrix = new TextBox();
+            label7 = new Label();
+            ((System.ComponentModel.ISupportInitialize)dgvYaris).BeginInit();
             SuspendLayout();
             // 
-            // textBox1
+            // txtYarisId
             // 
-            textBox1.Location = new Point(29, 75);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 0;
+            txtYarisId.Location = new Point(936, 77);
+            txtYarisId.Name = "txtYarisId";
+            txtYarisId.ReadOnly = true;
+            txtYarisId.Size = new Size(125, 27);
+            txtYarisId.TabIndex = 0;
+            txtYarisId.Visible = false;
             // 
-            // textBox2
+            // txtPistAdi
             // 
-            textBox2.Location = new Point(182, 75);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(125, 27);
-            textBox2.TabIndex = 1;
-            textBox2.TextChanged += textBox2_TextChanged;
+            txtPistAdi.Location = new Point(254, 77);
+            txtPistAdi.Name = "txtPistAdi";
+            txtPistAdi.Size = new Size(125, 27);
+            txtPistAdi.TabIndex = 1;
+            txtPistAdi.TextChanged += textBox2_TextChanged;
             // 
-            // textBox3
+            // txtTurSayisi
             // 
-            textBox3.Location = new Point(617, 75);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(125, 27);
-            textBox3.TabIndex = 2;
+            txtTurSayisi.Location = new Point(524, 77);
+            txtTurSayisi.Name = "txtTurSayisi";
+            txtTurSayisi.Size = new Size(125, 27);
+            txtTurSayisi.TabIndex = 2;
             // 
-            // textBox4
+            // txtSezonAyagi
             // 
-            textBox4.Location = new Point(936, 75);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(125, 27);
-            textBox4.TabIndex = 3;
+            txtSezonAyagi.Location = new Point(794, 77);
+            txtSezonAyagi.Name = "txtSezonAyagi";
+            txtSezonAyagi.Size = new Size(125, 27);
+            txtSezonAyagi.TabIndex = 3;
             // 
-            // dateTimePicker1
+            // dtpYarisTarihi
             // 
-            dateTimePicker1.Location = new Point(334, 75);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(250, 27);
-            dateTimePicker1.TabIndex = 4;
+            dtpYarisTarihi.Format = DateTimePickerFormat.Short;
+            dtpYarisTarihi.Location = new Point(389, 77);
+            dtpYarisTarihi.Name = "dtpYarisTarihi";
+            dtpYarisTarihi.Size = new Size(125, 27);
+            dtpYarisTarihi.TabIndex = 4;
             // 
-            // textBox5
+            // txtSezon
             // 
-            textBox5.Location = new Point(779, 75);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(125, 27);
-            textBox5.TabIndex = 5;
+            txtSezon.Location = new Point(659, 77);
+            txtSezon.Name = "txtSezon";
+            txtSezon.Size = new Size(125, 27);
+            txtSezon.TabIndex = 5;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(29, 52);
+            label1.Location = new Point(959, 54);
             label1.Name = "label1";
             label1.Size = new Size(58, 20);
             label1.TabIndex = 6;
             label1.Text = "Yarış ID";
+            label1.Visible = false;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(182, 52);
+            label2.Location = new Point(266, 54);
             label2.Name = "label2";
             label2.Size = new Size(59, 20);
             label2.TabIndex = 7;
@@ -112,7 +118,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(334, 52);
+            label3.Location = new Point(395, 54);
             label3.Name = "label3";
             label3.Size = new Size(78, 20);
             label3.TabIndex = 8;
@@ -121,7 +127,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(617, 52);
+            label4.Location = new Point(543, 54);
             label4.Name = "label4";
             label4.Size = new Size(71, 20);
             label4.TabIndex = 9;
@@ -130,7 +136,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(779, 52);
+            label5.Location = new Point(684, 54);
             label5.Name = "label5";
             label5.Size = new Size(49, 20);
             label5.TabIndex = 10;
@@ -139,99 +145,132 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(936, 52);
+            label6.Location = new Point(803, 54);
             label6.Name = "label6";
             label6.Size = new Size(91, 20);
             label6.TabIndex = 11;
             label6.Text = "Sezon Ayağı";
             // 
-            // dataGridView1
+            // dgvYaris
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(29, 163);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(1032, 331);
-            dataGridView1.TabIndex = 12;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dgvYaris.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvYaris.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvYaris.Location = new Point(29, 163);
+            dgvYaris.Name = "dgvYaris";
+            dgvYaris.RowHeadersWidth = 51;
+            dgvYaris.Size = new Size(1032, 331);
+            dgvYaris.TabIndex = 12;
+            dgvYaris.CellClick += dataGridView1_CellClick;
             // 
-            // button1
+            // btnEkle
             // 
-            button1.Location = new Point(155, 541);
-            button1.Name = "button1";
-            button1.Size = new Size(125, 65);
-            button1.TabIndex = 13;
-            button1.Text = "Ekle";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnEkle.Location = new Point(354, 541);
+            btnEkle.Name = "btnEkle";
+            btnEkle.Size = new Size(125, 65);
+            btnEkle.TabIndex = 13;
+            btnEkle.Text = "Ekle";
+            btnEkle.UseVisualStyleBackColor = true;
+            btnEkle.Click += btnEkle_Click;
             // 
-            // button2
+            // btnSil
             // 
-            button2.Location = new Point(479, 541);
-            button2.Name = "button2";
-            button2.Size = new Size(125, 65);
-            button2.TabIndex = 14;
-            button2.Text = "Sil";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            btnSil.Location = new Point(844, 541);
+            btnSil.Name = "btnSil";
+            btnSil.Size = new Size(125, 65);
+            btnSil.TabIndex = 14;
+            btnSil.Text = "Sil";
+            btnSil.UseVisualStyleBackColor = true;
+            btnSil.Click += btnSil_Click;
             // 
-            // button3
+            // btnGuncelle
             // 
-            button3.Location = new Point(797, 541);
-            button3.Name = "button3";
-            button3.Size = new Size(125, 65);
-            button3.TabIndex = 15;
-            button3.Text = "Güncelle";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            btnGuncelle.Location = new Point(599, 541);
+            btnGuncelle.Name = "btnGuncelle";
+            btnGuncelle.Size = new Size(125, 65);
+            btnGuncelle.TabIndex = 15;
+            btnGuncelle.Text = "Güncelle";
+            btnGuncelle.UseVisualStyleBackColor = true;
+            btnGuncelle.Click += btnGuncelle_Click;
             // 
-            // YarisForm
+            // btnAra
+            // 
+            btnAra.Location = new Point(109, 541);
+            btnAra.Name = "btnAra";
+            btnAra.Size = new Size(125, 65);
+            btnAra.TabIndex = 16;
+            btnAra.Text = "Ara";
+            btnAra.UseVisualStyleBackColor = true;
+            btnAra.Click += btnAra_Click;
+            // 
+            // txtGrandPrix
+            // 
+            txtGrandPrix.Location = new Point(119, 77);
+            txtGrandPrix.Name = "txtGrandPrix";
+            txtGrandPrix.Size = new Size(125, 27);
+            txtGrandPrix.TabIndex = 17;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(119, 54);
+            label7.Name = "label7";
+            label7.Size = new Size(77, 20);
+            label7.TabIndex = 18;
+            label7.Text = "Grand Prix";
+            // 
+            // FrmYaris
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(1082, 653);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(dataGridView1);
+            Controls.Add(label7);
+            Controls.Add(txtGrandPrix);
+            Controls.Add(btnAra);
+            Controls.Add(btnGuncelle);
+            Controls.Add(btnSil);
+            Controls.Add(btnEkle);
+            Controls.Add(dgvYaris);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(textBox5);
-            Controls.Add(dateTimePicker1);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Name = "YarisForm";
+            Controls.Add(txtSezon);
+            Controls.Add(dtpYarisTarihi);
+            Controls.Add(txtSezonAyagi);
+            Controls.Add(txtTurSayisi);
+            Controls.Add(txtPistAdi);
+            Controls.Add(txtYarisId);
+            Name = "FrmYaris";
             Text = "YarisForm";
             Load += YarisForm_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvYaris).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private DateTimePicker dateTimePicker1;
-        private TextBox textBox5;
+        private TextBox txtYarisId;
+        private TextBox txtPistAdi;
+        private TextBox txtTurSayisi;
+        private TextBox txtSezonAyagi;
+        private DateTimePicker dtpYarisTarihi;
+        private TextBox txtSezon;
         private Label label1;
         private Label label2;
         private Label label3;
         private Label label4;
         private Label label5;
         private Label label6;
-        private DataGridView dataGridView1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
+        private DataGridView dgvYaris;
+        private Button btnEkle;
+        private Button btnSil;
+        private Button btnGuncelle;
+        private Button btnAra;
+        private TextBox txtGrandPrix;
+        private Label label7;
     }
 }

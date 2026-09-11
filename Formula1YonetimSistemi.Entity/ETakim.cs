@@ -9,6 +9,11 @@ namespace Formula1YonetimSistemi.Entity
 {
     public class ETakim
     {
+        public ETakim()
+        {
+            
+        }
+
         public bool TakimEkle(Takim takim)
         {
             try

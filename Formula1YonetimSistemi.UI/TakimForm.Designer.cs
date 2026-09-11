@@ -1,6 +1,6 @@
 ﻿namespace Formula1YonetimSistemi.UI
 {
-    partial class TakimForm
+    partial class FrmTakim
     {
         /// <summary>
         /// Required designer variable.
@@ -28,179 +28,162 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            dataGridView1 = new DataGridView();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            textBox5 = new TextBox();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            txtTakimId = new TextBox();
+            txtTakimAdi = new TextBox();
+            txtKisaAd = new TextBox();
+            dgvTakim = new DataGridView();
+            btnEkle = new Button();
+            btnSil = new Button();
+            btnGuncelle = new Button();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            btnAra = new Button();
+            cmbMerkezUlke = new ComboBox();
+            txtKurulusYili = new TextBox();
+            ((System.ComponentModel.ISupportInitialize)dgvTakim).BeginInit();
             SuspendLayout();
             // 
-            // textBox1
+            // txtTakimId
             // 
-            textBox1.BackColor = System.Drawing.Color.FromArgb(35, 35, 45);
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Enabled = false;
-            textBox1.ForeColor = System.Drawing.Color.White;
-            textBox1.Location = new Point(59, 86);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 0;
+            txtTakimId.BackColor = Color.FromArgb(35, 35, 45);
+            txtTakimId.BorderStyle = BorderStyle.FixedSingle;
+            txtTakimId.Enabled = false;
+            txtTakimId.ForeColor = Color.White;
+            txtTakimId.Location = new Point(59, 86);
+            txtTakimId.Name = "txtTakimId";
+            txtTakimId.ReadOnly = true;
+            txtTakimId.Size = new Size(125, 27);
+            txtTakimId.TabIndex = 0;
+            txtTakimId.Visible = false;
             // 
-            // textBox2
+            // txtTakimAdi
             // 
-            textBox2.BackColor = System.Drawing.Color.FromArgb(35, 35, 45);
-            textBox2.BorderStyle = BorderStyle.FixedSingle;
-            textBox2.ForeColor = System.Drawing.Color.White;
-            textBox2.Location = new Point(251, 86);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(125, 27);
-            textBox2.TabIndex = 1;
+            txtTakimAdi.BackColor = Color.FromArgb(35, 35, 45);
+            txtTakimAdi.BorderStyle = BorderStyle.FixedSingle;
+            txtTakimAdi.ForeColor = Color.White;
+            txtTakimAdi.Location = new Point(157, 86);
+            txtTakimAdi.Name = "txtTakimAdi";
+            txtTakimAdi.Size = new Size(125, 27);
+            txtTakimAdi.TabIndex = 1;
             // 
-            // textBox3
+            // txtKisaAd
             // 
-            textBox3.BackColor = System.Drawing.Color.FromArgb(35, 35, 45);
-            textBox3.BorderStyle = BorderStyle.FixedSingle;
-            textBox3.ForeColor = System.Drawing.Color.White;
-            textBox3.Location = new Point(433, 86);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(125, 27);
-            textBox3.TabIndex = 2;
+            txtKisaAd.BackColor = Color.FromArgb(35, 35, 45);
+            txtKisaAd.BorderStyle = BorderStyle.FixedSingle;
+            txtKisaAd.ForeColor = Color.White;
+            txtKisaAd.Location = new Point(339, 86);
+            txtKisaAd.Name = "txtKisaAd";
+            txtKisaAd.Size = new Size(125, 27);
+            txtKisaAd.TabIndex = 2;
             // 
-            // textBox4
+            // dgvTakim
             // 
-            textBox4.BackColor = System.Drawing.Color.FromArgb(35, 35, 45);
-            textBox4.BorderStyle = BorderStyle.FixedSingle;
-            textBox4.ForeColor = System.Drawing.Color.White;
-            textBox4.Location = new Point(619, 86);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(125, 27);
-            textBox4.TabIndex = 3;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(245, 246, 248);
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvTakim.AllowUserToAddRows = false;
+            dgvTakim.AllowUserToDeleteRows = false;
+            dgvTakim.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvTakim.BackgroundColor = Color.FromArgb(245, 246, 248);
+            dgvTakim.BorderStyle = BorderStyle.None;
+            dgvTakim.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvTakim.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(21, 21, 30);
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(21, 21, 30);
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView1.ColumnHeadersHeight = 38;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(21, 21, 30);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(21, 21, 30);
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dgvTakim.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgvTakim.ColumnHeadersHeight = 38;
+            dgvTakim.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(30, 30, 30);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(225, 6, 0);
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.GridColor = System.Drawing.Color.FromArgb(220, 220, 225);
-            dataGridView1.Location = new Point(59, 177);
-            dataGridView1.MultiSelect = false;
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 32;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(857, 309);
-            dataGridView1.TabIndex = 4;
-            dataGridView1.CellClick += dataGridView1_CellClick;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(30, 30, 30);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(225, 6, 0);
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgvTakim.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvTakim.EnableHeadersVisualStyles = false;
+            dgvTakim.GridColor = Color.FromArgb(220, 220, 225);
+            dgvTakim.Location = new Point(59, 177);
+            dgvTakim.MultiSelect = false;
+            dgvTakim.Name = "dgvTakim";
+            dgvTakim.ReadOnly = true;
+            dgvTakim.RowHeadersVisible = false;
+            dgvTakim.RowHeadersWidth = 51;
+            dgvTakim.RowTemplate.Height = 32;
+            dgvTakim.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvTakim.Size = new Size(857, 309);
+            dgvTakim.TabIndex = 4;
+            dgvTakim.CellClick += dgvTakim_CellClick;
             // 
-            // button1
+            // btnEkle
             // 
-            button1.BackColor = System.Drawing.Color.FromArgb(225, 6, 0);
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new System.Drawing.Font("Segoe UI", 10F, FontStyle.Bold);
-            button1.ForeColor = System.Drawing.Color.White;
-            button1.Location = new Point(129, 536);
-            button1.Name = "button1";
-            button1.Size = new Size(125, 65);
-            button1.TabIndex = 5;
-            button1.Text = "Ekle";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            btnEkle.BackColor = Color.FromArgb(225, 6, 0);
+            btnEkle.FlatAppearance.BorderSize = 0;
+            btnEkle.FlatStyle = FlatStyle.Flat;
+            btnEkle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnEkle.ForeColor = Color.White;
+            btnEkle.Location = new Point(328, 536);
+            btnEkle.Name = "btnEkle";
+            btnEkle.Size = new Size(125, 65);
+            btnEkle.TabIndex = 5;
+            btnEkle.Text = "Ekle";
+            btnEkle.UseVisualStyleBackColor = false;
+            btnEkle.Click += btnEkle_Click;
             // 
-            // button2
+            // btnSil
             // 
-            button2.BackColor = System.Drawing.Color.FromArgb(45, 45, 55);
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new System.Drawing.Font("Segoe UI", 10F, FontStyle.Bold);
-            button2.ForeColor = System.Drawing.Color.White;
-            button2.Location = new Point(414, 536);
-            button2.Name = "button2";
-            button2.Size = new Size(125, 65);
-            button2.TabIndex = 6;
-            button2.Text = "Sil";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            btnSil.BackColor = Color.FromArgb(45, 45, 55);
+            btnSil.FlatAppearance.BorderSize = 0;
+            btnSil.FlatStyle = FlatStyle.Flat;
+            btnSil.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnSil.ForeColor = Color.White;
+            btnSil.Location = new Point(762, 536);
+            btnSil.Name = "btnSil";
+            btnSil.Size = new Size(125, 65);
+            btnSil.TabIndex = 6;
+            btnSil.Text = "Sil";
+            btnSil.UseVisualStyleBackColor = false;
+            btnSil.Click += btnSil_Click;
             // 
-            // button3
+            // btnGuncelle
             // 
-            button3.BackColor = System.Drawing.Color.FromArgb(30, 30, 40);
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new System.Drawing.Font("Segoe UI", 10F, FontStyle.Bold);
-            button3.ForeColor = System.Drawing.Color.White;
-            button3.Location = new Point(697, 536);
-            button3.Name = "button3";
-            button3.Size = new Size(125, 65);
-            button3.TabIndex = 7;
-            button3.Text = "Güncelle";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
-            // 
-            // textBox5
-            // 
-            textBox5.BackColor = System.Drawing.Color.FromArgb(35, 35, 45);
-            textBox5.BorderStyle = BorderStyle.FixedSingle;
-            textBox5.ForeColor = System.Drawing.Color.White;
-            textBox5.Location = new Point(791, 86);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(125, 27);
-            textBox5.TabIndex = 8;
+            btnGuncelle.BackColor = Color.FromArgb(30, 30, 40);
+            btnGuncelle.FlatAppearance.BorderSize = 0;
+            btnGuncelle.FlatStyle = FlatStyle.Flat;
+            btnGuncelle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnGuncelle.ForeColor = Color.White;
+            btnGuncelle.Location = new Point(545, 536);
+            btnGuncelle.Name = "btnGuncelle";
+            btnGuncelle.Size = new Size(125, 65);
+            btnGuncelle.TabIndex = 7;
+            btnGuncelle.Text = "Güncelle";
+            btnGuncelle.UseVisualStyleBackColor = false;
+            btnGuncelle.Click += btnGuncelle_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Segoe UI", 9F, FontStyle.Bold);
-            label1.ForeColor = System.Drawing.Color.White;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label1.ForeColor = Color.White;
             label1.Location = new Point(59, 63);
             label1.Name = "label1";
             label1.Size = new Size(71, 20);
             label1.TabIndex = 9;
             label1.Text = "Takım ID";
+            label1.Visible = false;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Segoe UI", 9F, FontStyle.Bold);
-            label2.ForeColor = System.Drawing.Color.White;
-            label2.Location = new Point(251, 63);
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(157, 63);
             label2.Name = "label2";
             label2.Size = new Size(79, 20);
             label2.TabIndex = 10;
@@ -209,20 +192,20 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Segoe UI", 9F, FontStyle.Bold);
-            label3.ForeColor = System.Drawing.Color.White;
-            label3.Location = new Point(433, 63);
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(339, 63);
             label3.Name = "label3";
-            label3.Size = new Size(61, 20);
+            label3.Size = new Size(62, 20);
             label3.TabIndex = 11;
             label3.Text = "Kısa Ad";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new System.Drawing.Font("Segoe UI", 9F, FontStyle.Bold);
-            label4.ForeColor = System.Drawing.Color.White;
-            label4.Location = new Point(619, 63);
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(525, 63);
             label4.Name = "label4";
             label4.Size = new Size(95, 20);
             label4.TabIndex = 12;
@@ -231,57 +214,93 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new System.Drawing.Font("Segoe UI", 9F, FontStyle.Bold);
-            label5.ForeColor = System.Drawing.Color.White;
-            label5.Location = new Point(791, 63);
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(697, 63);
             label5.Name = "label5";
             label5.Size = new Size(88, 20);
             label5.TabIndex = 13;
             label5.Text = "Kuruluş Yılı";
             // 
-            // TakimForm
+            // btnAra
+            // 
+            btnAra.BackColor = Color.FromArgb(30, 30, 40);
+            btnAra.FlatAppearance.BorderSize = 0;
+            btnAra.FlatStyle = FlatStyle.Flat;
+            btnAra.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnAra.ForeColor = Color.White;
+            btnAra.Location = new Point(111, 536);
+            btnAra.Name = "btnAra";
+            btnAra.Size = new Size(125, 65);
+            btnAra.TabIndex = 14;
+            btnAra.Text = "Ara";
+            btnAra.UseVisualStyleBackColor = false;
+            btnAra.Click += btnAra_Click;
+            // 
+            // cmbMerkezUlke
+            // 
+            cmbMerkezUlke.BackColor = Color.FromArgb(35, 35, 45);
+            cmbMerkezUlke.ForeColor = SystemColors.Window;
+            cmbMerkezUlke.FormattingEnabled = true;
+            cmbMerkezUlke.Location = new Point(509, 85);
+            cmbMerkezUlke.Name = "cmbMerkezUlke";
+            cmbMerkezUlke.Size = new Size(151, 28);
+            cmbMerkezUlke.TabIndex = 15;
+            // 
+            // txtKurulusYili
+            // 
+            txtKurulusYili.Location = new Point(697, 85);
+            txtKurulusYili.Name = "txtKurulusYili";
+            txtKurulusYili.Size = new Size(125, 27);
+            txtKurulusYili.TabIndex = 16;
+            // 
+            // FrmTakim
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = System.Drawing.Color.FromArgb(21, 21, 30);
+            BackColor = Color.FromArgb(21, 21, 30);
             ClientSize = new Size(982, 653);
+            Controls.Add(txtKurulusYili);
+            Controls.Add(cmbMerkezUlke);
+            Controls.Add(btnAra);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(textBox5);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(dataGridView1);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Name = "TakimForm";
+            Controls.Add(btnGuncelle);
+            Controls.Add(btnSil);
+            Controls.Add(btnEkle);
+            Controls.Add(dgvTakim);
+            Controls.Add(txtKisaAd);
+            Controls.Add(txtTakimAdi);
+            Controls.Add(txtTakimId);
+            Name = "FrmTakim";
             Text = "F1 Takım Yönetim Paneli";
             Load += TakimForm_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvTakim).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
+        private TextBox txtTakimId;
+        private TextBox txtTakimAdi;
+        private TextBox txtKisaAd;
+        private TextBox txtMerkezUlke;
         private DataGridView dataGridView1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private TextBox textBox5;
+        private Button btnEkle;
+        private Button btnSil;
+        private Button btnGuncelle;
         private Label label1;
         private Label label2;
         private Label label3;
         private Label label4;
         private Label label5;
+        private Button btnAra;
+        private ComboBox cmbMerkezUlke;
+        private TextBox txtKurulusYili;
+        private DataGridView dgvTakim;
     }
 }

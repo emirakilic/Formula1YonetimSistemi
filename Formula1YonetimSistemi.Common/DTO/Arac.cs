@@ -10,5 +10,6 @@ namespace Formula1YonetimSistemi.Common.DTO
         public string AracSasiKodu { get; set; }
         public string AracMotorTedarikcisi { get; set; }
         public int TakimId { get; set; }
+        public string TakimAdi { get; set; }
     }
 }

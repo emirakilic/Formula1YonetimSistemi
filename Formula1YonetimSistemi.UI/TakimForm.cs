@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Formula1YonetimSistemi.Common.DTO;
@@ -10,93 +11,170 @@ using Formula1YonetimSistemi.Service;
 
 namespace Formula1YonetimSistemi.UI
 {
-    public partial class TakimForm : Form
+    public partial class FrmTakim : Form
     {
-        public TakimForm()
+        public FrmTakim()
         {
             InitializeComponent();
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-            if (dataGridView1.CurrentRow == null) return;
-
-            textBox1.Text = dataGridView1.CurrentRow.Cells["TakimId"].Value.ToString();
-            textBox2.Text = dataGridView1.CurrentRow.Cells["TakimAdi"].Value.ToString();
-            textBox3.Text = dataGridView1.CurrentRow.Cells["KisaAd"].Value.ToString();
-            textBox4.Text = dataGridView1.CurrentRow.Cells["MerkezUlke"].Value.ToString();
-            textBox5.Text = dataGridView1.CurrentRow.Cells["KurulusYili"].Value.ToString();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (int.TryParse(textBox5.Text, out int kurulusYili))
-            {
-                Takim yeniTakim = new Takim
-                {
-                    // textBox1 (ID) otomatik artan olduğu için yeni kayıtta atlıyoruz
-                    TakimAdi = textBox2.Text,
-                    KisaAd = textBox3.Text,
-                    MerkezUlke = textBox4.Text,
-                    KurulusYili = kurulusYili
-                };
-
-                new STakim().STakimEkle(yeniTakim);
-
-                // Tabloyu anında yenile
-                dataGridView1.DataSource = new STakim().STakimlariGetir();
-            }
-            else
-            {
-                MessageBox.Show("Lütfen Kuruluş Yılı alanına sadece sayı giriniz!");
-            }
-        }
-
         private void TakimForm_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = new STakim().STakimlariGetir();
+            UlkeComboBoxDoldur();
+            ListeyiYenile();
+
+            txtTakimAdi.KeyPress += TxtTakimAdi_KeyPress;
+            txtKisaAd.KeyPress += TxtKisaAd_KeyPress;
+            txtKurulusYili.KeyPress += TxtKurulusYili_KeyPress;
+
+            F1TemaMotoru.TemayiUygula(form: this);
+        }
+
+        private void ListeyiYenile()
+        {
+            dgvTakim.DataSource = new STakim().STakimlariGetir();
             KolonBasliklariniTurkcelestir();
         }
-        
+
         private void KolonBasliklariniTurkcelestir()
         {
-            // Eğer DataGridView'de sütunlar otomatik oluşuyorsa isimleri şu şekilde değiştirebiliriz:
-            if (dataGridView1.Columns["TakimId"] != null)
-                dataGridView1.Columns["TakimId"].Visible = false;
+            if (dgvTakim.Columns["TakimId"] != null)
+                dgvTakim.Columns["TakimId"].Visible = false;
 
-            if (dataGridView1.Columns["TakimAdi"] != null)
-                dataGridView1.Columns["TakimAdi"].HeaderText = "Takım Adı";
+            if (dgvTakim.Columns["TakimAdi"] != null)
+                dgvTakim.Columns["TakimAdi"].HeaderText = "Takım Adı";
 
-            if (dataGridView1.Columns["KisaAd"] != null)
-                dataGridView1.Columns["KisaAd"].HeaderText = "Kısa Ad";
+            if (dgvTakim.Columns["KisaAd"] != null)
+                dgvTakim.Columns["KisaAd"].HeaderText = "Kısa Ad";
 
-            if (dataGridView1.Columns["MerkezUlke"] != null)
-                dataGridView1.Columns["MerkezUlke"].HeaderText = "Merkez Ülke";
+            if (dgvTakim.Columns["MerkezUlke"] != null)
+                dgvTakim.Columns["MerkezUlke"].HeaderText = "Merkez Ülke";
 
-            if (dataGridView1.Columns["KurulusYili"] != null)
-                dataGridView1.Columns["KurulusYili"].HeaderText = "Kuruluş Yılı";
+            if (dgvTakim.Columns["KurulusYili"] != null)
+                dgvTakim.Columns["KurulusYili"].HeaderText = "Kuruluş Yılı";
         }
 
-
-        private void button2_Click(object sender, EventArgs e)
+        private void UlkeComboBoxDoldur()
         {
-            // textBox1'deki Takım ID'yi sayıya çeviriyoruz
-            if (int.TryParse(textBox1.Text, out int silinecekId))
+            cmbMerkezUlke.Items.Clear();
+            cmbMerkezUlke.Items.Add("İngiltere");
+            cmbMerkezUlke.Items.Add("İtalya");
+            cmbMerkezUlke.Items.Add("İsviçre");
+            cmbMerkezUlke.Items.Add("Almanya");
+            cmbMerkezUlke.Items.Add("Fransa");
+            cmbMerkezUlke.Items.Add("ABD");
+            cmbMerkezUlke.SelectedIndex = -1;
+        }
+
+        private void dgvTakim_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvTakim.CurrentRow == null) return;
+
+            DataGridViewRow row = dgvTakim.CurrentRow;
+
+            txtTakimId.Text = row.Cells["TakimId"].Value.ToString();
+            txtTakimAdi.Text = row.Cells["TakimAdi"].Value.ToString();
+            txtKisaAd.Text = row.Cells["KisaAd"].Value.ToString();
+            cmbMerkezUlke.Text = row.Cells["MerkezUlke"].Value.ToString();
+
+            if (row.Cells["KurulusYili"].Value != DBNull.Value)
+            {
+                txtKurulusYili.Text = row.Cells["KurulusYili"].Value.ToString();
+            }
+        }
+
+        private void btnEkle_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtTakimAdi.Text) ||
+                string.IsNullOrWhiteSpace(txtKisaAd.Text) ||
+                string.IsNullOrWhiteSpace(cmbMerkezUlke.Text) ||
+                string.IsNullOrWhiteSpace(txtKurulusYili.Text))
+            {
+                MessageBox.Show("Lütfen tüm alanları eksiksiz doldurunuz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtTakimAdi.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("Takım Adı sadece rakamlardan oluşamaz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!int.TryParse(txtKurulusYili.Text, out int kurulusYili))
+            {
+                MessageBox.Show("Lütfen Kuruluş Yılı için geçerli bir sayı giriniz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Takim yeniTakim = new Takim
+            {
+                TakimAdi = txtTakimAdi.Text,
+                KisaAd = txtKisaAd.Text,
+                MerkezUlke = cmbMerkezUlke.Text,
+                KurulusYili = kurulusYili
+            };
+
+            new STakim().STakimEkle(yeniTakim);
+            ListeyiYenile();
+            KutulariTemizle();
+            MessageBox.Show("Takım başarıyla eklendi!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnGuncelle_Click(object sender, EventArgs e)
+        {
+            if (!int.TryParse(txtTakimId.Text, out int takimId))
+            {
+                MessageBox.Show("Lütfen güncellenecek takımı tablodan seçiniz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtTakimAdi.Text) ||
+                string.IsNullOrWhiteSpace(txtKisaAd.Text) ||
+                string.IsNullOrWhiteSpace(cmbMerkezUlke.Text) ||
+                string.IsNullOrWhiteSpace(txtKurulusYili.Text))
+            {
+                MessageBox.Show("Lütfen tüm alanları eksiksiz doldurunuz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtTakimAdi.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("Takım Adı sadece rakamlardan oluşamaz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!int.TryParse(txtKurulusYili.Text, out int kurulusYili))
+            {
+                MessageBox.Show("Lütfen Kuruluş Yılı için geçerli bir sayı giriniz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Takim guncellenecekTakim = new Takim
+            {
+                TakimId = takimId,
+                TakimAdi = txtTakimAdi.Text,
+                KisaAd = txtKisaAd.Text,
+                MerkezUlke = cmbMerkezUlke.Text,
+                KurulusYili = kurulusYili
+            };
+
+            new STakim().STakimGuncelle(guncellenecekTakim);
+            ListeyiYenile();
+            KutulariTemizle();
+            MessageBox.Show("Takım başarıyla güncellendi!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(txtTakimId.Text, out int silinecekId))
             {
                 DialogResult secim = MessageBox.Show("Bu takımı silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (secim == DialogResult.Yes)
                 {
-                    // Takımı sil
                     new STakim().STakimSil(silinecekId);
-
-                    // Tabloyu yenile
-                    dataGridView1.DataSource = new STakim().STakimlariGetir();
-
-                    // Kutuları temizle
-                    textBox1.Clear(); textBox2.Clear(); textBox3.Clear();
-                    textBox4.Clear(); textBox5.Clear();
+                    ListeyiYenile();
+                    KutulariTemizle();
                 }
             }
             else
@@ -105,33 +183,71 @@ namespace Formula1YonetimSistemi.UI
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btnAra_Click(object sender, EventArgs e)
         {
-            // Takım ID ve Kuruluş Yılı alanlarının sayı olduğundan emin oluyoruz
-            if (int.TryParse(textBox1.Text, out int takimId) &&
-                int.TryParse(textBox5.Text, out int kurulusYili))
+            List<Takim> takimListesi = new STakim().STakimlariGetir();
+
+            if (!string.IsNullOrWhiteSpace(txtTakimAdi.Text))
             {
-                Takim guncellenecekTakim = new Takim
-                {
-                    TakimId = takimId,
-                    TakimAdi = textBox2.Text,
-                    KisaAd = textBox3.Text,
-                    MerkezUlke = textBox4.Text,
-                    KurulusYili = kurulusYili
-                };
-
-                new STakim().STakimGuncelle(guncellenecekTakim);
-
-                // Tabloyu anında güncelle
-                dataGridView1.DataSource = new STakim().STakimlariGetir();
-
-                MessageBox.Show("Takım başarıyla güncellendi!");
+                takimListesi = takimListesi.FindAll(t =>
+                    t.TakimAdi.ToLower().Contains(txtTakimAdi.Text.ToLower())
+                );
             }
-            else
+
+            if (!string.IsNullOrWhiteSpace(txtKisaAd.Text))
             {
-                MessageBox.Show("Lütfen tablodan bir takım seçtiğinizden ve Kuruluş Yılı'nı doğru girdiğinizden emin olun!");
+                takimListesi = takimListesi.FindAll(t =>
+                    t.KisaAd.ToLower().Contains(txtKisaAd.Text.ToLower())
+                );
+            }
+
+            if (!string.IsNullOrWhiteSpace(cmbMerkezUlke.Text))
+            {
+                takimListesi = takimListesi.FindAll(t => t.MerkezUlke == cmbMerkezUlke.Text);
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtKurulusYili.Text) && int.TryParse(txtKurulusYili.Text, out int arananYil))
+            {
+                takimListesi = takimListesi.FindAll(t => t.KurulusYili == arananYil);
+            }
+
+            dgvTakim.DataSource = takimListesi;
+        }
+
+        private void KutulariTemizle()
+        {
+            txtTakimId.Clear();
+            txtTakimAdi.Clear();
+            txtKisaAd.Clear();
+            cmbMerkezUlke.SelectedIndex = -1;
+            txtKurulusYili.Clear();
+        }
+
+        private void TxtTakimAdi_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("Takım Adı sadece metin içerebilir!");
             }
         }
 
+        private void TxtKisaAd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("Kısa Ad sadece metin içerebilir!");
+            }
+        }
+
+        private void TxtKurulusYili_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Delete)
+            {
+                e.Handled = true;
+                MessageBox.Show("Kuruluş Yılı sadece sayı girebilir!");
+            }
+        }
     }
 }

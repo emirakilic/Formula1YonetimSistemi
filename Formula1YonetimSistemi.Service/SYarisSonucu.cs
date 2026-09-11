@@ -6,6 +6,10 @@ namespace Formula1YonetimSistemi.Service
 {
     public class SYarisSonucu
     {
+        public SYarisSonucu()
+        {
+
+        }
         public YarisSonucu SGetirYarisSonucuById(YarisSonucu sorgulanacakSonuc)
         {
             return new EYarisSonucu().GetirYarisSonucuById(sorgulanacakSonuc);
@@ -26,9 +30,9 @@ namespace Formula1YonetimSistemi.Service
             return new EYarisSonucu().YarisSonucuSil(yarisSonucuId);
         }
 
-        public List<YarisSonucu> SYarisSonuclariniGetir(int? yarisId = null)
+        public List<YarisSonucu> SYarisSonuclariniGetir(YarisSonucu sonuc)
         {
-            return new EYarisSonucu().YarisSonuclariniGetir(yarisId);
+            return new EYarisSonucu().YarisSonuclariniGetir(sonuc);
         }
     }
 }

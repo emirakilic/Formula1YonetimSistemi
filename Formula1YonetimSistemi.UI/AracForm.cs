@@ -1,78 +1,178 @@
-﻿using System;
+﻿using Formula1YonetimSistemi.Common.DTO;
+using Formula1YonetimSistemi.Service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Formula1YonetimSistemi.Service;
-using Formula1YonetimSistemi.Common.DTO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Formula1YonetimSistemi.UI
 {
-    public partial class AracForm : Form
+    public partial class FrmArac : Form
     {
-        public AracForm()
+        public FrmArac()
         {
             InitializeComponent();
         }
 
         private void AracForm_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = new SArac().SAraclariGetir();
+            ComboBoxlariDoldur();
+            dgvArac.DataSource = new SArac().SAraclariGetir();
+            dgvArac.Columns["AracId"].Visible = false;
+            dgvArac.Columns["TakimId"].Visible = false;
+            cmbTakim.SelectedIndex = -1;
+
+            txtMotor.KeyPress += TxtMotor_KeyPress;
+
+            F1TemaMotoru.TemayiUygula(this);
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void ComboBoxlariDoldur()
         {
-            if (int.TryParse(textBox1.Text, out int id) && int.TryParse(textBox4.Text, out int takimId))
-            {
-                Arac guncellenecekArac = new Arac
-                {
-                    AracId = id,
-                    AracSasiKodu = textBox2.Text,
-                    AracMotorTedarikcisi = textBox3.Text,
-                    TakimId = takimId
-                };
+            cmbTakim.DataSource = new STakim().STakimlariGetir();
 
-                new SArac().SAracGuncelle(guncellenecekArac);
+            cmbTakim.DisplayMember = "TakimAdi";
 
-                // Tabloyu güncelle
-                dataGridView1.DataSource = new SArac().SAraclariGetir();
-            }
-            else
-            {
-                MessageBox.Show("Lütfen geçerli bir ID ve Takım ID girdiğinizden emin olun!");
-            }
+            cmbTakim.ValueMember = "TakimId";
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnAra_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Butona basıldı, kutudaki değer: " + textBox2.Text);
+            SArac aracServisi = new SArac();
+            Arac aramaKriteri = new Arac();
+
+            if (cmbTakim.SelectedIndex != -1 && cmbTakim.SelectedValue != null)
+            {
+                aramaKriteri.TakimId = (int)cmbTakim.SelectedValue;
+            }
+
+            List<Arac> aracListesi = aracServisi.SAraclariGetir(aramaKriteri);
+
+            if (!string.IsNullOrWhiteSpace(txtSasiKodu.Text))
+            {
+                aracListesi = aracListesi.FindAll(a => a.AracSasiKodu.ToLower().Contains(txtSasiKodu.Text.ToLower()));
+            }
+
+            dgvArac.DataSource = aracListesi;
+        }
+
+        private void btnEkle_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSasiKodu.Text))
+            {
+                MessageBox.Show("Lütfen Şasi Kodu giriniz!");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtMotor.Text))
+            {
+                MessageBox.Show("Lütfen Motor Tedarikçisi giriniz!");
+                return;
+            }
+
+            if (cmbTakim.SelectedValue == null)
+            {
+                MessageBox.Show("Lütfen bir Takım seçiniz!");
+                return;
+            }
 
             Arac yeniArac = new Arac
             {
-                // Araç ID kutusunu (textBox1) atlıyoruz çünkü veritabanı ID'yi otomatik veriyor
-
-                AracSasiKodu = textBox2.Text,
-                AracMotorTedarikcisi = textBox3.Text,
-                TakimId = int.Parse(textBox4.Text) // 4. kutudaki metni tam sayıya çeviriyoruz
+                AracSasiKodu = txtSasiKodu.Text,
+                AracMotorTedarikcisi = txtMotor.Text,
+                TakimId = Convert.ToInt32(cmbTakim.SelectedValue)
             };
 
             new SArac().SAracEkle(yeniArac);
 
-            // Kayıt eklendikten sonra tabloyu anında yenilemek için listeleme kodunu tekrar çağırıyoruz:
-            dataGridView1.DataSource = new SArac().SAraclariGetir();
+            dgvArac.DataSource = new SArac().SAraclariGetir();
+            MessageBox.Show("Araç başarıyla eklendi!");
+            Liste_Temizle();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnGuncelle_Click(object sender, EventArgs e)
         {
-            int silinecekId = int.Parse(textBox1.Text); // Araç ID kutusuna yazılan numarayı alıyoruz
+            if (!int.TryParse(txtAracId.Text, out int id))
+            {
+                MessageBox.Show("Lütfen güncellenecek aracı tablodan seçiniz!");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtSasiKodu.Text))
+            {
+                MessageBox.Show("Lütfen Şasi Kodu giriniz!");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtMotor.Text))
+            {
+                MessageBox.Show("Lütfen Motor Tedarikçisi giriniz!");
+                return;
+            }
+
+            if (cmbTakim.SelectedValue == null)
+            {
+                MessageBox.Show("Lütfen bir Takım seçiniz!");
+                return;
+            }
+
+            Arac guncellenecekArac = new Arac
+            {
+                AracId = id,
+                AracSasiKodu = txtSasiKodu.Text,
+                AracMotorTedarikcisi = txtMotor.Text,
+                TakimId = Convert.ToInt32(cmbTakim.SelectedValue)
+            };
+
+            new SArac().SAracGuncelle(guncellenecekArac);
+
+            dgvArac.DataSource = new SArac().SAraclariGetir();
+            MessageBox.Show("Araç başarıyla güncellendi!");
+            Liste_Temizle();
+        }
+
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+            int silinecekId = int.Parse(txtAracId.Text);
 
             new SArac().SAracSil(silinecekId);
 
-            // Silme bittikten sonra tabloyu güncelliyoruz
-            dataGridView1.DataSource = new SArac().SAraclariGetir();
+            dgvArac.DataSource = new SArac().SAraclariGetir();
         }
 
+        private void dgvArac_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvArac.Rows[e.RowIndex];
+
+                txtAracId.Text = row.Cells["AracId"].Value.ToString();
+                txtSasiKodu.Text = row.Cells["AracSasiKodu"].Value.ToString();
+                txtMotor.Text = row.Cells["AracMotorTedarikcisi"].Value.ToString();
+
+                cmbTakim.SelectedValue = row.Cells["TakimId"].Value;
+            }
+        }
+
+        private void Liste_Temizle()
+        {
+            txtAracId.Clear();
+            txtSasiKodu.Clear();
+            txtMotor.Clear();
+            cmbTakim.SelectedIndex = -1;
+        }
+
+        private void TxtMotor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("Motor Tedarikçisi sadece metin içerebilir!");
+            }
+        }
     }
 }

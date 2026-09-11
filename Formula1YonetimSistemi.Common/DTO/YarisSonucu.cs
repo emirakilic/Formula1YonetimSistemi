@@ -12,5 +12,9 @@ namespace Formula1YonetimSistemi.Common.DTO
         public string YarisEnHizliTurZamani { get; set; }
         public int YarisId { get; set; }
         public int PilotId { get; set; }
+        public string PistAdi { get; set; }
+        public string PilotAdi { get; set; }
+        public int PilotNumarasi { get; set; }
+        public string TakimAdi { get; set; }
     }
 }

@@ -12,5 +12,6 @@ namespace Formula1YonetimSistemi.Common.DTO
         public int TurSayisi { get; set; }
         public int Sezon { get; set; }
         public int SezonAyagi { get; set; }
+        public string GrandPrix { get; set; }
     }
 }

@@ -7,6 +7,10 @@ namespace Formula1YonetimSistemi.Service
 {
     public class SPilot
     {
+        public SPilot()
+        {
+
+        }
         public Pilot SGetirPilotById(Pilot sorgulanacakPilot)
         {
             return new EPilot().GetirPilotById(sorgulanacakPilot);

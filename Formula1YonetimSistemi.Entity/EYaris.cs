@@ -8,6 +8,11 @@ namespace Formula1YonetimSistemi.Entity
 {
     public class EYaris
     {
+        public EYaris()
+        {
+
+        }
+
         public bool YarisEkle(Yaris yaris)
         {
             try
@@ -17,12 +22,13 @@ namespace Formula1YonetimSistemi.Entity
                     using (SqlCommand command = new SqlCommand("sp_YarisEkle", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
-
+                        
                         command.Parameters.AddWithValue("@PistAdi", yaris.PistAdi);
                         command.Parameters.AddWithValue("@YarisTarihi", yaris.YarisTarihi);
                         command.Parameters.AddWithValue("@TurSayisi", yaris.TurSayisi);
                         command.Parameters.AddWithValue("@Sezon", yaris.Sezon);
                         command.Parameters.AddWithValue("@SezonAyagi", yaris.SezonAyagi);
+                        command.Parameters.AddWithValue("@GrandPrix", yaris.GrandPrix);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();
@@ -59,7 +65,8 @@ namespace Formula1YonetimSistemi.Entity
                                     YarisTarihi = (DateTime)reader["YarisTarihi"],
                                     TurSayisi = (int)reader["TurSayisi"],
                                     Sezon = (int)reader["Sezon"],
-                                    SezonAyagi = (int)reader["SezonAyagi"]
+                                    SezonAyagi = (int)reader["SezonAyagi"],
+                                    GrandPrix = reader["GrandPrix"] != DBNull.Value ? (string)reader["GrandPrix"] : string.Empty
                                 };
                             }
                             return null;
@@ -89,6 +96,7 @@ namespace Formula1YonetimSistemi.Entity
                         command.Parameters.AddWithValue("@TurSayisi", yaris.TurSayisi);
                         command.Parameters.AddWithValue("@Sezon", yaris.Sezon);
                         command.Parameters.AddWithValue("@SezonAyagi", yaris.SezonAyagi);
+                        command.Parameters.AddWithValue("@GrandPrix", yaris.GrandPrix);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();
@@ -136,6 +144,8 @@ namespace Formula1YonetimSistemi.Entity
                     using (SqlCommand command = new SqlCommand("sp_YarislariGetir", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@Sezon", sezon.HasValue ? (object)sezon.Value : DBNull.Value);
+                        command.Parameters.AddWithValue("@GrandPrix", DBNull.Value); // İleride arama çubuğu yaparsan burayı da dışarıdan alabilirsin
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -148,7 +158,8 @@ namespace Formula1YonetimSistemi.Entity
                                     YarisTarihi = (DateTime)reader["YarisTarihi"],
                                     TurSayisi = (int)reader["TurSayisi"],
                                     Sezon = (int)reader["Sezon"],
-                                    SezonAyagi = (int)reader["SezonAyagi"]
+                                    SezonAyagi = (int)reader["SezonAyagi"],
+                                    GrandPrix = reader["GrandPrix"] != DBNull.Value ? (string)reader["GrandPrix"] : string.Empty
                                 });
                             }
                         }
@@ -161,6 +172,40 @@ namespace Formula1YonetimSistemi.Entity
             }
 
             return yarislar;
+        }
+
+        public List<Yaris> EPistleriGetir()
+        {
+            List<Yaris> pistler = new List<Yaris>();
+
+            try
+            {
+                using (SqlConnection connection = SqlHelper.GetConnection())
+                {
+                    using (SqlCommand command = new SqlCommand("sp_PistleriGetir", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                pistler.Add(new Yaris()
+                                {
+                                    PistAdi = reader["PistAdi"].ToString(),
+                                    YarisId = Convert.ToInt32(reader["YarisId"])
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Pist listesi çekilirken hata oluştu: " + ex.Message);
+            }
+
+            return pistler;
         }
     }
 }

@@ -31,9 +31,9 @@ namespace Formula1YonetimSistemi.Service
             return new EArac().AracSil(aracId);
         }
 
-        public List<Arac> SAraclariGetir(int? takimId = null, string aracMotorTedarikcisi = null)
+        public List<Arac> SAraclariGetir(Arac aramaKriteri = null)
         {
-            return new EArac().AraclariGetir(takimId, aracMotorTedarikcisi);
+            return new EArac().AraclariGetir(aramaKriteri);
         }
     }
 }

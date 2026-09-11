@@ -11,5 +11,6 @@ namespace Formula1YonetimSistemi.Common.DTO
         public int PilotNo { get; set; }
         public bool PilotAktifMi { get; set; }
         public int TakimId { get; set; }
+        public string TakimAdi { get; set; }
     }
 }

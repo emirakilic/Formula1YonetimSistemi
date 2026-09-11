@@ -1,6 +1,6 @@
 ﻿namespace Formula1YonetimSistemi.UI
 {
-    partial class AracForm
+    partial class FrmArac
     {
         /// <summary>
         /// Required designer variable.
@@ -28,102 +28,100 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new DataGridView();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            label1 = new Label();
+            dgvArac = new DataGridView();
+            txtAracId = new TextBox();
+            txtSasiKodu = new TextBox();
+            txtMotor = new TextBox();
+            btnEkle = new Button();
+            btnSil = new Button();
+            btnGuncelle = new Button();
+            lblAracId = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            cmbTakim = new ComboBox();
+            btnAra = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvArac).BeginInit();
             SuspendLayout();
             // 
-            // dataGridView1
+            // dgvArac
             // 
-            dataGridView1.BackgroundColor = SystemColors.ControlLight;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 171);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(958, 284);
-            dataGridView1.TabIndex = 0;
+            dgvArac.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvArac.BackgroundColor = SystemColors.ControlLight;
+            dgvArac.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvArac.Location = new Point(12, 171);
+            dgvArac.Name = "dgvArac";
+            dgvArac.RowHeadersWidth = 51;
+            dgvArac.Size = new Size(958, 284);
+            dgvArac.TabIndex = 0;
+            dgvArac.CellClick += dgvArac_CellClick;
             // 
-            // textBox1
+            // txtAracId
             // 
-            textBox1.Location = new Point(45, 78);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(146, 27);
-            textBox1.TabIndex = 1;
+            txtAracId.Location = new Point(45, 78);
+            txtAracId.Name = "txtAracId";
+            txtAracId.Size = new Size(146, 27);
+            txtAracId.TabIndex = 1;
+            txtAracId.Visible = false;
             // 
-            // textBox2
+            // txtSasiKodu
             // 
-            textBox2.Location = new Point(285, 78);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(149, 27);
-            textBox2.TabIndex = 2;
+            txtSasiKodu.Location = new Point(196, 78);
+            txtSasiKodu.Name = "txtSasiKodu";
+            txtSasiKodu.Size = new Size(149, 27);
+            txtSasiKodu.TabIndex = 2;
             // 
-            // textBox3
+            // txtMotor
             // 
-            textBox3.Location = new Point(526, 78);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(143, 27);
-            textBox3.TabIndex = 3;
+            txtMotor.Location = new Point(439, 78);
+            txtMotor.Name = "txtMotor";
+            txtMotor.Size = new Size(143, 27);
+            txtMotor.TabIndex = 3;
             // 
-            // textBox4
+            // btnEkle
             // 
-            textBox4.Location = new Point(765, 78);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(148, 27);
-            textBox4.TabIndex = 4;
+            btnEkle.Location = new Point(329, 522);
+            btnEkle.Name = "btnEkle";
+            btnEkle.Size = new Size(125, 65);
+            btnEkle.TabIndex = 5;
+            btnEkle.Text = "Ekle";
+            btnEkle.UseVisualStyleBackColor = true;
+            btnEkle.Click += btnEkle_Click;
             // 
-            // button1
+            // btnSil
             // 
-            button1.Location = new Point(138, 515);
-            button1.Name = "button1";
-            button1.Size = new Size(125, 65);
-            button1.TabIndex = 5;
-            button1.Text = "Ekle";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnSil.Location = new Point(765, 522);
+            btnSil.Name = "btnSil";
+            btnSil.Size = new Size(125, 65);
+            btnSil.TabIndex = 6;
+            btnSil.Text = "Sil";
+            btnSil.UseVisualStyleBackColor = true;
+            btnSil.Click += btnSil_Click;
             // 
-            // button2
+            // btnGuncelle
             // 
-            button2.Location = new Point(411, 515);
-            button2.Name = "button2";
-            button2.Size = new Size(125, 65);
-            button2.TabIndex = 6;
-            button2.Text = "Sil";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            btnGuncelle.Location = new Point(547, 522);
+            btnGuncelle.Name = "btnGuncelle";
+            btnGuncelle.Size = new Size(125, 65);
+            btnGuncelle.TabIndex = 7;
+            btnGuncelle.Text = "Güncelle";
+            btnGuncelle.UseVisualStyleBackColor = true;
+            btnGuncelle.Click += btnGuncelle_Click;
             // 
-            // button3
+            // lblAracId
             // 
-            button3.Location = new Point(716, 515);
-            button3.Name = "button3";
-            button3.Size = new Size(125, 65);
-            button3.TabIndex = 7;
-            button3.Text = "Güncelle";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(47, 55);
-            label1.Name = "label1";
-            label1.Size = new Size(58, 20);
-            label1.TabIndex = 8;
-            label1.Text = "Araç ID";
+            lblAracId.AutoSize = true;
+            lblAracId.Location = new Point(47, 55);
+            lblAracId.Name = "lblAracId";
+            lblAracId.Size = new Size(58, 20);
+            lblAracId.TabIndex = 8;
+            lblAracId.Text = "Araç ID";
+            lblAracId.Visible = false;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(286, 57);
+            label2.Location = new Point(197, 57);
             label2.Name = "label2";
             label2.Size = new Size(74, 20);
             label2.TabIndex = 9;
@@ -132,7 +130,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(526, 55);
+            label3.Location = new Point(437, 55);
             label3.Name = "label3";
             label3.Size = new Size(50, 20);
             label3.TabIndex = 10;
@@ -141,52 +139,74 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(765, 55);
+            label4.Location = new Point(676, 55);
             label4.Name = "label4";
             label4.Size = new Size(47, 20);
             label4.TabIndex = 11;
             label4.Text = "Takım";
             // 
-            // AracForm
+            // cmbTakim
+            // 
+            cmbTakim.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbTakim.FormattingEnabled = true;
+            cmbTakim.Location = new Point(676, 78);
+            cmbTakim.Name = "cmbTakim";
+            cmbTakim.Size = new Size(151, 28);
+            cmbTakim.TabIndex = 12;
+            // 
+            // btnAra
+            // 
+            btnAra.Location = new Point(111, 522);
+            btnAra.Name = "btnAra";
+            btnAra.Size = new Size(125, 65);
+            btnAra.TabIndex = 13;
+            btnAra.Text = "Ara";
+            btnAra.UseVisualStyleBackColor = true;
+            btnAra.Click += btnAra_Click;
+            // 
+            // FrmArac
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientInactiveCaption;
             ClientSize = new Size(982, 653);
+            Controls.Add(btnAra);
+            Controls.Add(cmbTakim);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(dataGridView1);
-            Name = "AracForm";
+            Controls.Add(lblAracId);
+            Controls.Add(btnGuncelle);
+            Controls.Add(btnSil);
+            Controls.Add(btnEkle);
+            Controls.Add(txtMotor);
+            Controls.Add(txtSasiKodu);
+            Controls.Add(txtAracId);
+            Controls.Add(dgvArac);
+            Name = "FrmArac";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Arac Form";
             Load += AracForm_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvArac).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dataGridView1;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
+        private DataGridView dgvArac;
+        private TextBox txtAracId;
+        private TextBox txtSasiKodu;
+        private TextBox txtMotor;
         private TextBox textBox4;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Label label1;
+        private Button btnEkle;
+        private Button btnSil;
+        private Button btnGuncelle;
+        private Label lblAracId;
         private Label label2;
         private Label label3;
         private Label label4;
+        private ComboBox cmbTakim;
+        private Button btnAra;
     }
 }

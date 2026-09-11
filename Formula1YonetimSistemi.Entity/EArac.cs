@@ -8,6 +8,11 @@ namespace Formula1YonetimSistemi.Entity
 {
     public class EArac
     {
+        public EArac()
+        {
+            
+        }
+
         public bool AracEkle(Arac arac)
         {
             try
@@ -33,6 +38,7 @@ namespace Formula1YonetimSistemi.Entity
                 throw new Exception($"Araç ekleme işleminde hata oluştu! Şasi: {arac.AracSasiKodu}, Motor: {arac.AracMotorTedarikcisi}", ex);
             }
         }
+
         public Arac GetirAracById(Arac arac)
         {
             try
@@ -54,7 +60,8 @@ namespace Formula1YonetimSistemi.Entity
                                     AracId = (int)reader["AracId"],
                                     AracSasiKodu = (string)reader["AracSasiKodu"],
                                     AracMotorTedarikcisi = (string)reader["AracMotorTedarikcisi"],
-                                    TakimId = (int)reader["TakimId"]
+                                    TakimId = (int)reader["TakimId"],
+                                    TakimAdi = reader["TakimAdi"] != DBNull.Value ? (string)reader["TakimAdi"] : ""
                                 };
                             }
                             return null;
@@ -67,6 +74,7 @@ namespace Formula1YonetimSistemi.Entity
                 throw new Exception($"Araç getirme işleminde hata oluştu! AracId: {arac.AracId}", ex);
             }
         }
+
         public bool AracGuncelle(Arac arac)
         {
             try
@@ -93,6 +101,7 @@ namespace Formula1YonetimSistemi.Entity
                 throw new Exception($"Araç güncelleme işleminde hata oluştu! AracId: {arac.AracId}", ex);
             }
         }
+
         public bool AracSil(int aracId)
         {
             try
@@ -115,10 +124,10 @@ namespace Formula1YonetimSistemi.Entity
                 throw new Exception($"Araç silme işleminde hata oluştu! AracId: {aracId}", ex);
             }
         }
-        public List<Arac> AraclariGetir(int? takimId = null, string aracMotorTedarikcisi = null)
+
+        public List<Arac> AraclariGetir(Arac aramaKriteri = null)
         {
             List<Arac> araclar = new List<Arac>();
-
             try
             {
                 using (SqlConnection connection = SqlHelper.GetConnection())
@@ -127,8 +136,17 @@ namespace Formula1YonetimSistemi.Entity
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@TakimId", takimId != null ? (object)takimId : DBNull.Value);
-                        command.Parameters.AddWithValue("@AracMotorTedarikcisi", aracMotorTedarikcisi != null ? (object)aracMotorTedarikcisi : DBNull.Value);
+                        object p_takimId = DBNull.Value;
+
+                        // DTO'nun içi doluysa ve bir takım seçildiyse, o ID'yi alıyoruz
+                        if (aramaKriteri != null && aramaKriteri.TakimId > 0)
+                        {
+                            p_takimId = aramaKriteri.TakimId;
+                        }
+
+                        command.Parameters.AddWithValue("@TakimId", p_takimId);
+                        // Motor parametresi SQL'de varsa hata vermemesi için null geçiyoruz
+                        command.Parameters.AddWithValue("@AracMotorTedarikcisi", DBNull.Value);
 
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -140,7 +158,8 @@ namespace Formula1YonetimSistemi.Entity
                                     AracId = (int)reader["AracId"],
                                     AracSasiKodu = (string)reader["AracSasiKodu"],
                                     AracMotorTedarikcisi = (string)reader["AracMotorTedarikcisi"],
-                                    TakimId = (int)reader["TakimId"]
+                                    TakimId = (int)reader["TakimId"],
+                                    TakimAdi = reader["TakimAdi"] != DBNull.Value ? (string)reader["TakimAdi"] : ""
                                 });
                             }
                         }
@@ -151,7 +170,6 @@ namespace Formula1YonetimSistemi.Entity
             {
                 throw new Exception($"Araçları listeleme işleminde hata oluştu!", ex);
             }
-
             return araclar;
         }
     }

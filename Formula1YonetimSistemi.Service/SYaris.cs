@@ -6,6 +6,10 @@ namespace Formula1YonetimSistemi.Service
 {
     public class SYaris
     {
+        public SYaris()
+        {
+
+        }
         public Yaris SGetirYarisById(Yaris sorgulanacakYaris)
         {
             return new EYaris().GetirYarisById(sorgulanacakYaris);
@@ -29,6 +33,11 @@ namespace Formula1YonetimSistemi.Service
         public List<Yaris> SYarislariGetir(int? sezon = null)
         {
             return new EYaris().YarislariGetir(sezon);
+        }
+
+        public List<Yaris> SPistleriGetir()
+        {
+            return new EYaris().EPistleriGetir();
         }
     }
 }

@@ -3,12 +3,18 @@ using Formula1YonetimSistemi.Common.Helpers;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using System.Text;
 
 namespace Formula1YonetimSistemi.Entity
 {
     public class EPilot
     {
+        public EPilot()
+        {
+
+        }
+
         public bool PilotEkle(Pilot pilot)
         {
             try
@@ -150,7 +156,9 @@ namespace Formula1YonetimSistemi.Entity
                                     PilotNo = (int)reader["PilotNo"],
                                     PilotAdSoyad = (string)reader["PilotAdSoyad"],
                                     PilotAktifMi = (bool)reader["PilotAktifMi"],
-                                    TakimId = (int)reader["TakimId"]
+                                    TakimId = (int)reader["TakimId"],
+
+                                    TakimAdi = reader["TakimAdi"] != DBNull.Value ? reader["TakimAdi"].ToString() : "Takımsız"
                                 });
                             }
                         }

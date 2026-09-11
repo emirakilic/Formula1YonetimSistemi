@@ -8,6 +8,11 @@ namespace Formula1YonetimSistemi.Entity
 {
     public class EYarisSonucu
     {
+        public EYarisSonucu()
+        {
+            
+        }
+
         public bool YarisSonucuEkle(YarisSonucu sonuc)
         {
             try
@@ -126,7 +131,7 @@ namespace Formula1YonetimSistemi.Entity
         }
 
         // Listeleme işlemi genellikle belirli bir yarışın sonuçlarını getirmek için kullanılır.
-        public List<YarisSonucu> YarisSonuclariniGetir(int? yarisId = null)
+        public List<YarisSonucu> YarisSonuclariniGetir(YarisSonucu sonucSorgusu)
         {
             List<YarisSonucu> sonuclar = new List<YarisSonucu>();
 
@@ -137,8 +142,8 @@ namespace Formula1YonetimSistemi.Entity
                     using (SqlCommand command = new SqlCommand("sp_YarisSonuclariniGetir", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@YarisId", yarisId.HasValue ? (object)yarisId.Value : DBNull.Value);
-                        command.Parameters.AddWithValue("@PilotId", DBNull.Value); // Pilot filtresi şimdilik boş geçilebilir
+                        command.Parameters.AddWithValue("@PistAdi", string.IsNullOrEmpty(sonucSorgusu.PistAdi) ? DBNull.Value : (object)sonucSorgusu.PistAdi);
+                        command.Parameters.AddWithValue("@PilotId", sonucSorgusu.PilotId > 0 ? (object)sonucSorgusu.PilotId : DBNull.Value);
 
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -152,7 +157,13 @@ namespace Formula1YonetimSistemi.Entity
                                     YarisPuani = (decimal)reader["YarisPuani"],
                                     YarisEnHizliTurZamani = reader["YarisEnHizliTurZamani"] != DBNull.Value ? reader["YarisEnHizliTurZamani"].ToString() : "",
                                     YarisId = (int)reader["YarisId"],
-                                    PilotId = (int)reader["PilotId"]
+                                    PilotId = (int)reader["PilotId"],
+
+                                    // SQL'den gelen isimlerle C# okuması burada eşleşmeli:
+                                    PistAdi = reader["PistAdi"].ToString(),
+                                    PilotAdi = reader["PilotAdi"].ToString(),           // SQL'de 'AS PilotAdi' dedik
+                                    PilotNumarasi = (int)reader["PilotNumarasi"], // "PilotNo" yerine "PilotNumarasi" yaptık             // veya SQL'deki durumuna göre
+                                    TakimAdi = reader["TakimAdi"] != DBNull.Value ? reader["TakimAdi"].ToString() : ""
                                 });
                             }
                         }
