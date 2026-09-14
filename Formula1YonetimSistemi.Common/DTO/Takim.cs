@@ -12,4 +12,4 @@ namespace Formula1YonetimSistemi.Common.DTO
         public string MerkezUlke { get; set; }
         public int KurulusYili { get; set; }
     }
-}
+} 

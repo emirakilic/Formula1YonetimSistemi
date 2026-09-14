@@ -34,6 +34,7 @@
             btnTakim = new Button();
             btnYaris = new Button();
             btnArac = new Button();
+            btnRaporlar = new Button();
             gbGiris = new GroupBox();
             btnGiris = new Button();
             lblSifre = new Label();
@@ -57,6 +58,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.BackColor = SystemColors.ActiveCaptionText;
             splitContainer1.Panel1.Controls.Add(btnYarisSonucu);
             splitContainer1.Panel1.Controls.Add(btnPilot);
             splitContainer1.Panel1.Controls.Add(btnTakim);
@@ -65,6 +67,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.BackColor = SystemColors.ActiveCaptionText;
+            splitContainer1.Panel2.Controls.Add(btnRaporlar);
             splitContainer1.Panel2.Controls.Add(gbGiris);
             splitContainer1.Size = new Size(1046, 474);
             splitContainer1.SplitterDistance = 81;
@@ -129,6 +133,18 @@
             btnArac.Text = "Araç";
             btnArac.UseVisualStyleBackColor = false;
             btnArac.Click += btnArac_Click;
+            // 
+            // btnRaporlar
+            // 
+            btnRaporlar.BackColor = Color.FromArgb(225, 6, 0);
+            btnRaporlar.FlatStyle = FlatStyle.Flat;
+            btnRaporlar.Location = new Point(58, 55);
+            btnRaporlar.Name = "btnRaporlar";
+            btnRaporlar.Size = new Size(115, 53);
+            btnRaporlar.TabIndex = 6;
+            btnRaporlar.Text = "Raporlar";
+            btnRaporlar.UseVisualStyleBackColor = false;
+            btnRaporlar.Click += btnRaporlar_Click;
             // 
             // gbGiris
             // 
@@ -220,5 +236,6 @@
         private TextBox txtSifre;
         private Label lblKullaniciAdi;
         private TextBox txtKullaniciAdi;
+        private Button btnRaporlar;
     }
 }

@@ -61,7 +61,7 @@ namespace Formula1YonetimSistemi.Entity
                                 {
                                     YarisSonucId = (int)reader["YarisSonucuId"],
                                     YarisPozisyon = (int)reader["YarisPozisyon"],
-                                    YarisPuani = (decimal)reader["YarisPuani"],
+                                    YarisPuani = Convert.ToInt32(reader["YarisPuani"]),
                                     YarisEnHizliTurZamani = (string)reader["YarisEnHizliTurZamani"],
                                     YarisId = (int)reader["YarisId"],
                                     PilotId = (int)reader["PilotId"]
@@ -130,7 +130,6 @@ namespace Formula1YonetimSistemi.Entity
             }
         }
 
-        // Listeleme işlemi genellikle belirli bir yarışın sonuçlarını getirmek için kullanılır.
         public List<YarisSonucu> YarisSonuclariniGetir(YarisSonucu sonucSorgusu)
         {
             List<YarisSonucu> sonuclar = new List<YarisSonucu>();
@@ -154,16 +153,17 @@ namespace Formula1YonetimSistemi.Entity
                                 {
                                     YarisSonucId = (int)reader["YarisSonucId"],
                                     YarisPozisyon = (int)reader["YarisPozisyon"],
-                                    YarisPuani = (decimal)reader["YarisPuani"],
+                                    YarisPuani = Convert.ToInt32(reader["YarisPuani"]),
                                     YarisEnHizliTurZamani = reader["YarisEnHizliTurZamani"] != DBNull.Value ? reader["YarisEnHizliTurZamani"].ToString() : "",
                                     YarisId = (int)reader["YarisId"],
                                     PilotId = (int)reader["PilotId"],
 
-                                    // SQL'den gelen isimlerle C# okuması burada eşleşmeli:
                                     PistAdi = reader["PistAdi"].ToString(),
-                                    PilotAdi = reader["PilotAdi"].ToString(),           // SQL'de 'AS PilotAdi' dedik
-                                    PilotNumarasi = (int)reader["PilotNumarasi"], // "PilotNo" yerine "PilotNumarasi" yaptık             // veya SQL'deki durumuna göre
-                                    TakimAdi = reader["TakimAdi"] != DBNull.Value ? reader["TakimAdi"].ToString() : ""
+                                    PilotAdi = reader["PilotAdi"].ToString(),
+                                    PilotNumarasi = (int)reader["PilotNumarasi"],
+                                    TakimAdi = reader["TakimAdi"] != DBNull.Value ? reader["TakimAdi"].ToString() : "",
+                                    
+                                    Sezon = reader["Sezon"] != DBNull.Value ? Convert.ToInt32(reader["Sezon"]) : 0
                                 });
                             }
                         }

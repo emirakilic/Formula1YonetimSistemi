@@ -16,5 +16,7 @@ namespace Formula1YonetimSistemi.Common.DTO
         public string PilotAdi { get; set; }
         public int PilotNumarasi { get; set; }
         public string TakimAdi { get; set; }
+        public int Sezon { get; set; }
+
     }
 }

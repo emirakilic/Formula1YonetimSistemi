@@ -39,22 +39,20 @@ namespace Formula1YonetimSistemi.UI
         {
             try
             {
-                cmbPilot.DataSource = null;
                 cmbPilot.DataSource = new SPilot().SPilotlariGetir();
                 cmbPilot.DisplayMember = "PilotAdSoyad";
                 cmbPilot.ValueMember = "PilotId";
 
-                cmbPist.DataSource = null;
-                cmbPist.DataSource = new SYaris().SPistleriGetir();
-                cmbPist.DisplayMember = "PistAdi";
-                cmbPist.ValueMember = "YarisId";
+                var tumYarislar = new SYaris().SYarislariGetir();
+
+                cmbPist.DataSource = tumYarislar.Select(y => y.PistAdi).Distinct().ToList();
+                cmbSezon.DataSource = tumYarislar.Select(y => y.Sezon).Distinct().OrderBy(s => s).ToList();
 
                 cmbPilot.SelectedIndex = -1;
                 cmbPist.SelectedIndex = -1;
+                cmbSezon.SelectedIndex = -1;
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
 
         private void ListeyiYenile()
@@ -64,18 +62,22 @@ namespace Formula1YonetimSistemi.UI
             if (cmbPilot.SelectedIndex != -1 && cmbPilot.SelectedValue != null)
             {
                 if (int.TryParse(cmbPilot.SelectedValue.ToString(), out int pId))
-                {
                     aramaKriteri.PilotId = pId;
-                }
             }
 
             if (cmbPist.SelectedIndex != -1 && cmbPist.SelectedItem != null)
             {
-                string secilenPist = cmbPist.SelectedItem.ToString();
-                aramaKriteri.PistAdi = secilenPist;
+                aramaKriteri.PistAdi = cmbPist.SelectedItem.ToString();
             }
 
             List<YarisSonucu> yarisSonucuListesi = new SYarisSonucu().SYarisSonuclariniGetir(aramaKriteri);
+
+            // SEZON FİLTRESİ (C# Tarafında LINQ ile)
+            if (cmbSezon.SelectedIndex != -1 && cmbSezon.SelectedItem != null)
+            {
+                int secilenSezon = Convert.ToInt32(cmbSezon.SelectedItem);
+                yarisSonucuListesi = yarisSonucuListesi.Where(y => y.Sezon == secilenSezon).ToList();
+            }
 
             satirIdleri.Clear();
             for (int i = 0; i < yarisSonucuListesi.Count; i++)
@@ -85,6 +87,7 @@ namespace Formula1YonetimSistemi.UI
 
             var gorsterilecekVeriler = yarisSonucuListesi.Select(y => new
             {
+                y.Sezon, // YIL EKLENDİ
                 y.PistAdi,
                 y.PilotAdi,
                 y.PilotNumarasi,
@@ -119,26 +122,37 @@ namespace Formula1YonetimSistemi.UI
 
         private void btnEkle_Click(object sender, EventArgs e)
         {
-            if (cmbPilot.SelectedIndex == -1 || cmbPist.SelectedIndex == -1 ||
+            if (cmbPilot.SelectedIndex == -1 || cmbPist.SelectedIndex == -1 || cmbSezon.SelectedIndex == -1 ||
                 string.IsNullOrWhiteSpace(txtYarisPozisyonu.Text) || string.IsNullOrWhiteSpace(txtYarisPuani.Text))
             {
-                MessageBox.Show("Lütfen Pilot, Pist, Pozisyon ve Puan alanlarını eksiksiz doldurunuz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Lütfen Pilot, Pist, Sezon, Pozisyon ve Puan alanlarını eksiksiz doldurunuz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (!int.TryParse(txtYarisPozisyonu.Text, out int yarisPozisyon) || !decimal.TryParse(txtYarisPuani.Text, out decimal yarisPuani))
             {
-                MessageBox.Show("Lütfen Pozisyon ve Puan için geçerli sayısal değerler giriniz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Geçerli sayısal değerler giriniz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // SEÇİLEN PİST VE SEZONA GÖRE GERÇEK YARIS ID'Yİ BULUYORUZ
+            string secilenPist = cmbPist.SelectedItem.ToString();
+            int secilenSezon = Convert.ToInt32(cmbSezon.SelectedItem);
+
+            var hedefYaris = new SYaris().SYarislariGetir().FirstOrDefault(y => y.PistAdi == secilenPist && y.Sezon == secilenSezon);
+            if (hedefYaris == null)
+            {
+                MessageBox.Show("Seçilen pist ve sezona ait takvimde bir yarış bulunamadı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             YarisSonucu yeniYarisSonucu = new YarisSonucu
             {
                 PilotId = Convert.ToInt32(cmbPilot.SelectedValue),
-                YarisId = Convert.ToInt32(cmbPist.SelectedValue),
+                YarisId = hedefYaris.YarisId, // BULUNAN ID BURAYA GELİYOR
                 YarisPozisyon = yarisPozisyon,
                 YarisPuani = yarisPuani,
-                YarisEnHizliTurZamani = txtEnHizliTur.Text // Burası string olmalı
+                YarisEnHizliTurZamani = txtEnHizliTur.Text
             };
 
             new SYarisSonucu().SYarisSonucuEkle(yeniYarisSonucu);
@@ -226,8 +240,10 @@ namespace Formula1YonetimSistemi.UI
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            // Tablo başlıklarına tıklanınca hata vermesini engelliyoruz
             if (e.RowIndex >= 0)
             {
+                // 'row' değişkenini burada tanımlıyoruz ki alt satırlar veriyi nereden alacağını bilsin
                 DataGridViewRow row = dgvYarisSonucu.Rows[e.RowIndex];
 
                 if (satirIdleri.ContainsKey(e.RowIndex))
@@ -235,7 +251,8 @@ namespace Formula1YonetimSistemi.UI
                     var (yarisSonucId, pilotId, yarisId) = satirIdleri[e.RowIndex];
 
                     cmbPilot.SelectedValue = pilotId;
-                    cmbPist.SelectedValue = yarisId;
+                    cmbPist.SelectedItem = row.Cells["PistAdi"].Value?.ToString();
+                    cmbSezon.SelectedItem = Convert.ToInt32(row.Cells["Sezon"].Value);
 
                     txtYarisPozisyonu.Text = row.Cells["YarisPozisyon"].Value?.ToString();
                     txtYarisPuani.Text = row.Cells["YarisPuani"].Value?.ToString();
@@ -293,5 +310,6 @@ namespace Formula1YonetimSistemi.UI
                 MessageBox.Show("Lütfen Pilot ve Pist alanına sadece metin girişi yapınız!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
     }
 }

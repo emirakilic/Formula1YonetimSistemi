@@ -45,5 +45,11 @@ namespace Formula1YonetimSistemi.UI
             FrmYarisSonucu yarisSonucuFormu = new FrmYarisSonucu();
             yarisSonucuFormu.Show();
         }
+
+        private void btnRaporlar_Click(object sender, EventArgs e)
+        {
+            FrmRapor raporFormu = new FrmRapor();
+            raporFormu.Show();
+        }
     }
 }
