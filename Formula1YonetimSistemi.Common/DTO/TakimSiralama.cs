@@ -5,10 +5,9 @@ using Formula1YonetimSistemi.Common;
 
 namespace Formula1YonetimSistemi.Common.DTO
 {
-    public class PilotSiralama
+    public class TakimSiralama
     {
-        public int Sira { get; set; }
-        public string PilotAdi { get; set; }
+        public string TakimAdi { get; set; }
         public int ToplamPuan { get; set; }
     }
 }

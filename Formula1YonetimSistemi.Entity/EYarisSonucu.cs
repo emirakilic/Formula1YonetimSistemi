@@ -88,7 +88,7 @@ namespace Formula1YonetimSistemi.Entity
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@YarisSonucuId", sonuc.YarisSonucId);
+                        command.Parameters.AddWithValue("@YarisSonucId", sonuc.YarisSonucId);
                         command.Parameters.AddWithValue("@YarisPozisyon", sonuc.YarisPozisyon);
                         command.Parameters.AddWithValue("@YarisPuani", sonuc.YarisPuani);
                         command.Parameters.AddWithValue("@YarisEnHizliTurZamani", sonuc.YarisEnHizliTurZamani);
@@ -116,7 +116,7 @@ namespace Formula1YonetimSistemi.Entity
                     using (SqlCommand command = new SqlCommand("sp_YarisSonucuSil", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@YarisSonucuId", yarisSonucuId);
+                        command.Parameters.AddWithValue("@YarisSonucId", yarisSonucuId);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();

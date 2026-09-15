@@ -96,6 +96,7 @@
             dgvYarisSonucu.RowHeadersWidth = 51;
             dgvYarisSonucu.Size = new Size(894, 324);
             dgvYarisSonucu.TabIndex = 5;
+            dgvYarisSonucu.CellClick += dataGridView1_CellClick;
             // 
             // btnEkle
             // 
